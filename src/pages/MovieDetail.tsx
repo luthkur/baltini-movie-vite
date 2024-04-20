@@ -36,10 +36,19 @@ export default function MovieDetail() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center p-4 border rounded border-solid">
       <img width={300} height={444} src={data?.Poster} alt={data?.Title} />
-      <h2>{data?.Title}</h2>
-      <h2>{data?.Year}</h2>
+      <h2>Title: {data?.Title}</h2>
+      <div className="flex flex-col items-start">
+        <h2>Genre :{data?.Genre}</h2>
+        <h2>Year " {data?.Year}</h2>
+        <h2>Type : {data?.Type}</h2>
+        <h2>Rating : {data?.Rated}</h2>
+        <h2>Runtime : {data?.Runtime}</h2>
+        <h2>Plot : {data?.Plot}</h2>
+        <h2>Starring : {data?.Actors}</h2>
+        <h2>Rating : {data?.imdbRating}</h2>
+      </div>
       {AddedToMyList ? (
         <>
           <h2>Added To MY List</h2>

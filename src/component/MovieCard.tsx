@@ -3,7 +3,7 @@ import { Movie } from "src/types/movie";
 
 export default function MovieCard({ MovieData }: { MovieData: Movie }) {
   return (
-    <div className="flex justify-center items-center  p-4 border rounded border-solid">
+    <div className="flex justify-center items-center p-4 border rounded border-solid">
       <Link to={`/movie/${MovieData.imdbID}`}>
         <img
           className="object-contain w-full h-full"
