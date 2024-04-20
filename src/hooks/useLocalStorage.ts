@@ -41,10 +41,10 @@ const useLocalstorage = (key: string, initialValue = "") => {
 
   // Listen to localstorage change to apply it
   const changeHandler = useCallback(
-    (e) => {
+    (e: StorageEvent) => {
       const { key: changeKey, newValue } = e;
       if (key === changeKey) {
-        setStoredValue(JSON.parse(newValue));
+        setStoredValue(JSON.parse(newValue as string));
       }
     },
     [key]
@@ -62,7 +62,8 @@ const useLocalstorage = (key: string, initialValue = "") => {
 
   // Build the output
   return useMemo(() => {
-    const setValue = (value) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const setValue = (value: any) => {
       if (!available) {
         return false;
       }
