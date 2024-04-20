@@ -3,7 +3,7 @@ import { fetchMovieList } from "../api/movie";
 import MovieCard from "../component/MovieCard";
 import { Movie } from "src/types/movie";
 import useLocalstorage from "src/hooks/useLocalStorage";
-import { useCallback, useMemo, useRef } from "react";
+import { useMemo } from "react";
 export default function MovieList({
   searchKeyword,
 }: {
@@ -12,24 +12,18 @@ export default function MovieList({
   const [MyList] = useLocalstorage("MyList", "[]");
   const ArrayList = JSON.parse(MyList);
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    isFetching,
-    isFetchingNextPage,
-    isLoading,
-  } = useInfiniteQuery({
-    queryKey: ["MovieList", searchKeyword],
-    queryFn: ({ pageParam }) => fetchMovieList({ searchKeyword, pageParam }),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) {
-        return undefined;
-      }
-      return lastPageParam + 1;
-    },
-  });
+  const { data, error, fetchNextPage, isFetching, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["MovieList", searchKeyword],
+      queryFn: ({ pageParam }) => fetchMovieList({ searchKeyword, pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, _, lastPageParam) => {
+        if (lastPage.length === 0) {
+          return undefined;
+        }
+        return lastPageParam + 1;
+      },
+    });
   const movieData = useMemo(() => {
     return data?.pages.reduce((acc, page) => {
       console.log(page.Search);
@@ -59,7 +53,7 @@ export default function MovieList({
         <button
           onClick={() => {
             console.log("clicked");
-            console.log(data.pageParams);
+            console.log(data?.pageParams);
             fetchNextPage();
           }}
         >
