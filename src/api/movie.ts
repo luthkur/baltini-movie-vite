@@ -1,6 +1,12 @@
-export async function fetchMovieList(search: string) {
+export async function fetchMovieList({
+  searchKeyword,
+  pageParam = 1,
+}: {
+  searchKeyword: string;
+  pageParam: number;
+}) {
   const res = await fetch(
-    `https://www.omdbapi.com/?s=${search}&apikey=7d2bc3be`
+    `https://www.omdbapi.com/?s=${searchKeyword}&page=${pageParam}&apikey=7d2bc3be`
   );
   const data = await res.json();
   return data;
