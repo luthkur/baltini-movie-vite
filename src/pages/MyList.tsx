@@ -12,7 +12,9 @@ export default function MyList() {
   return (
     <div>
       <h2>MyList</h2>
-      {MyListComponent}
+      <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
+        {MyListComponent}
+      </div>
     </div>
   );
 }
