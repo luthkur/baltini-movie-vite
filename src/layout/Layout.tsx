@@ -8,7 +8,7 @@ export default function Layout() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Movie List</Link>
+            <Link to="/">Movie List Beta</Link>
           </li>
           <li>
             <Link to="/my-list">MyList</Link>
